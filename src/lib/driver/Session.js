@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import * as StellarSdk from 'stellar-sdk';
-import WalletConnectClient, { CLIENT_EVENTS } from '@walletconnect/client/dist/umd/index.min';
+import WalletConnectClient, { CLIENT_EVENTS } from '@walletconnect/client';
 import TransportWebUSB from '@ledgerhq/hw-transport-webusb';
 import AppStellar from '@ledgerhq/hw-app-str';
 import TrezorConnect from 'trezor-connect';
