@@ -147,10 +147,28 @@ export default function Send(driver) {
         this.appMeta = this.walletConnectSession.peer.metadata;
         const keypair = StellarSdk.Keypair.fromPublicKey(publicKey);
 
+        this.listenWalletConnectEvents();
+
         return this.handlers.logIn(keypair, {
             authType: 'wallet-connect',
         });
     };
+
+    this.listenWalletConnectEvents = () => {
+        this.walletConnectClient.on(CLIENT_EVENTS.pairing.created, res => {
+            this.appMeta = res.state.metadata;
+        });
+
+        this.walletConnectClient.on(CLIENT_EVENTS.pairing.updated, res => {
+            this.appMeta = res.state.metadata;
+        });
+
+        this.walletConnectClient.on(CLIENT_EVENTS.session.deleted, () => {
+            if (this.walletConnectSession) {
+                this.handlers.logout();
+            }
+        });
+    }
 
     this.handlers = {
         logInWithSecret: async secretKey => {
@@ -180,20 +198,7 @@ export default function Send(driver) {
                 },
             );
 
-            this.walletConnectClient.on(CLIENT_EVENTS.pairing.created, res => {
-                this.appMeta = res.state.metadata;
-            });
-
-            this.walletConnectClient.on(CLIENT_EVENTS.pairing.updated, res => {
-                this.appMeta = res.state.metadata;
-            });
-
-
-            this.walletConnectClient.on(CLIENT_EVENTS.session.deleted, () => {
-                if (this.walletConnectSession) {
-                    this.handlers.logout();
-                }
-            });
+            this.listenWalletConnectEvents();
 
             try {
                 this.walletConnectSession = await this.walletConnectClient.connect({
