@@ -213,6 +213,7 @@ export default function Send(driver) {
                     },
                 });
             } catch (e) {
+                driver.toastService.error('Log in error', 'Session not approved');
                 return driver.modal.handlers.cancel();
             }
 
