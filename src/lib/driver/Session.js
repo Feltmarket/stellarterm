@@ -136,6 +136,8 @@ export default function Send(driver) {
             relayProvider: 'wss://relay.walletconnect.org',
         });
 
+        this.listenWalletConnectEvents();
+
         if (!this.walletConnectClient.session.topics.length) {
             return null;
         }
@@ -146,8 +148,6 @@ export default function Send(driver) {
         const [publicKey] = this.walletConnectSession.state.accounts[0].split('@');
         this.appMeta = this.walletConnectSession.peer.metadata;
         const keypair = StellarSdk.Keypair.fromPublicKey(publicKey);
-
-        this.listenWalletConnectEvents();
 
         return this.handlers.logIn(keypair, {
             authType: 'wallet-connect',
@@ -168,7 +168,18 @@ export default function Send(driver) {
                 this.handlers.logout();
             }
         });
-    }
+
+        this.walletConnectClient.on(
+            CLIENT_EVENTS.pairing.proposal,
+            async proposal => {
+                console.log(proposal);
+                // uri should be shared with the Wallet either through QR Code scanning or mobile deep linking
+                const { uri } = proposal.signal.params;
+
+                driver.modal.handlers.activate('WalletConnectLoginModal', uri);
+            },
+        );
+    };
 
     this.handlers = {
         logInWithSecret: async secretKey => {
@@ -187,18 +198,6 @@ export default function Send(driver) {
             if (!this.walletConnectClient) {
                 await this.initWalletConnect();
             }
-            this.walletConnectClient.on(
-                CLIENT_EVENTS.pairing.proposal,
-                async proposal => {
-                    console.log(proposal);
-                    // uri should be shared with the Wallet either through QR Code scanning or mobile deep linking
-                    const { uri } = proposal.signal.params;
-
-                    driver.modal.handlers.activate('WalletConnectLoginModal', uri);
-                },
-            );
-
-            this.listenWalletConnectEvents();
 
             try {
                 this.walletConnectSession = await this.walletConnectClient.connect({
