@@ -86,7 +86,6 @@ class TermApp extends React.Component {
                 }
             };
         }
-        this.props.d.session.initWalletConnect();
     }
 
     componentWillUnmount() {

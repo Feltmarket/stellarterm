@@ -14,9 +14,9 @@ export default function SessionAccount(props) {
             <Generic>
                 {props.d.session.authType === 'wallet-connect' &&
                 <div className="AccountView_app">
-                    <div>App name: {props.d.session.appMeta.name}</div>
-                    <div>App description: {props.d.session.appMeta.description}</div>
-                    <img src={props.d.session.appMeta.icons[0]} alt="" height="50" />
+                    <div>App name: {props.d.walletConnectService.appMeta.name}</div>
+                    <div>App description: {props.d.walletConnectService.appMeta.description}</div>
+                    <img src={props.d.walletConnectService.appMeta.icons[0]} alt="" height="50" />
                 </div>
                 }
 

@@ -3,10 +3,28 @@ import PropTypes from 'prop-types';
 import images from '../../../images';
 import Ellipsis from '../../Common/Ellipsis/Ellipsis';
 
-export default function WalletConnectSignModal(props) {
+export default function WalletConnectRequestModal(props) {
     const [txState, setTxState] = useState('loading');
 
     const { data, submit } = props;
+
+    if (data.isSessionRequest) {
+        return (
+            <div className="MultisigSubmitModal WalletConnectSignModal">
+                <div className="MultisigSubmitModal__header">
+                    You are paired with {data.title}
+                </div>
+                <div className="MultisigSubmitModal__content">
+                    <img
+                        src={images[data.logo] || data.logo}
+                        className="MultisigSubmitModal__logo"
+                        alt={data.title}
+                    />
+                    <span>Approve or reject session using {data.title}</span>
+                </div>
+            </div>
+        );
+    }
 
     data.result
         .then(() => {
@@ -55,7 +73,7 @@ export default function WalletConnectSignModal(props) {
         </div>
     );
 }
-WalletConnectSignModal.propTypes = {
+WalletConnectRequestModal.propTypes = {
     data: PropTypes.objectOf(PropTypes.string),
     submit: PropTypes.objectOf(PropTypes.func),
 };

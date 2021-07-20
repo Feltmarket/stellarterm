@@ -8,6 +8,7 @@ import Orderbook from './driver/Orderbook';
 import Modal from './driver/Modal';
 import ToastService from './driver/ToastService';
 import HorizonServer from './HorizonServer';
+import WalletConnectService from './driver/WalletConnectService';
 
 BigNumber.config({ EXPONENTIAL_AT: 100 });
 
@@ -20,6 +21,7 @@ function Driver() {
     this.accountEvents = new AccountEvents(this);
     this.modal = new Modal(this);
     this.toastService = new ToastService(this);
+    this.walletConnectService = new WalletConnectService(this);
 
     window.view = accountId => {
         this.session.handlers.logInWithPublicKey(accountId);

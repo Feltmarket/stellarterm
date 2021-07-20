@@ -39,7 +39,6 @@ export default class HomePage extends React.Component {
     render() {
         return (
             <div>
-
                 <div className="HomePage__black">
                     <div className="so-back">
                         <div className="HomePage__lead">

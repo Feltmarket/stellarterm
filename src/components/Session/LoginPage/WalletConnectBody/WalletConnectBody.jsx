@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import images from '../../../../images';
 import HiddenDescription from '../Common/HiddenDescription';
@@ -8,17 +8,22 @@ import AcceptTerms from '../Common/AcceptTerms';
 
 
 const WalletConnectBody = ({ history, d, modal }) => {
-    const loginWithWalletConnect = (e) => {
+    const [loading, setLoading] = useState(false);
+
+    const loginWithWalletConnect = e => {
+        setLoading(true);
         e.preventDefault();
 
-        d.session.handlers.loginWithWalletConnect();
+        d.session.handlers.loginWithWalletConnect().then(() => {
+            setLoading(false);
+        });
     };
 
     const getWalletConnectLoginForm = () => (
         <form onSubmit={loginWithWalletConnect}>
             <div className="LoginPage__submitWrap">
 
-                <AcceptTerms loginButtonText={'Sign in'} />
+                <AcceptTerms loginButtonText={'Sign in'} loading={loading} />
             </div>
         </form>
     );
@@ -40,7 +45,8 @@ const WalletConnectBody = ({ history, d, modal }) => {
                             onClick={() => history.goBack()}
                             className="LoginPage__header-goBack"
                             src={images['icon-arrow-left-green-large']}
-                            alt="<" />
+                            alt="<"
+                        />
                         <HiddenDescription />
                     </div>
                     <div className="LoginPage__header">

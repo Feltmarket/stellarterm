@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import images from '../../../images';
 import QRCode from 'qrcode.react';
+import images from '../../../images';
 import CopyButton from '../../Common/CopyButton/CopyButton';
 
 
-const WalletConnectLoginModal = ({ submit, uri }) => (
-    <div className="WalletConnectLoginModal">
+const WalletConnectQRModal = ({ submit, uri }) => (
+    <div className="WalletConnectQRModal">
         <div className="Modal_header">
             <span>Scan QR-code with a WalletConnect-compatible wallet</span>
             <img
@@ -17,19 +17,19 @@ const WalletConnectLoginModal = ({ submit, uri }) => (
                 }}
             />
         </div>
-        <div className="WalletConnectLoginModal_content">
+        <div className="WalletConnectQRModal_content">
             <QRCode value={uri} size={500} renderAs="svg" />
 
-            <div className="WalletConnectLoginModal_copy">
+            <div className="WalletConnectQRModal_copy">
                 <CopyButton text={uri} />
             </div>
         </div>
     </div>
 );
 
-export default WalletConnectLoginModal;
+export default WalletConnectQRModal;
 
-WalletConnectLoginModal.propTypes = {
+WalletConnectQRModal.propTypes = {
     uri: PropTypes.string.isRequired,
     submit: PropTypes.objectOf(PropTypes.func),
 };
