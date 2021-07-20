@@ -8,16 +8,17 @@ import AccountIdBlock from '../../AccountIdBlock/AccountIdBlock';
 
 export default function SessionAccount(props) {
     const accountID = props.d.session.account.accountId();
+    const hasMetadata = Boolean(props.d.walletConnectService.appMeta);
 
     return (
         <React.Fragment>
             <Generic>
-                {props.d.session.authType === 'wallet-connect' &&
-                <div className="AccountView_app">
-                    <div>App name: {props.d.walletConnectService.appMeta.name}</div>
-                    <div>App description: {props.d.walletConnectService.appMeta.description}</div>
-                    <img src={props.d.walletConnectService.appMeta.icons[0]} alt="" height="50" />
-                </div>
+                {hasMetadata &&
+                    <div className="AccountView_app">
+                        <div>App name: {props.d.walletConnectService.appMeta.name}</div>
+                        <div>App description: {props.d.walletConnectService.appMeta.description}</div>
+                        <img src={props.d.walletConnectService.appMeta.icons[0]} alt="" height="50" />
+                    </div>
                 }
 
                 <AccountIdBlock accountID={accountID} />
