@@ -38,7 +38,7 @@ const WalletConnectPairingModal = ({ submit, data }) => {
 export default WalletConnectPairingModal;
 
 WalletConnectPairingModal.propTypes = {
-    submit: PropTypes.func,
+    submit: PropTypes.objectOf(PropTypes.func),
     data: PropTypes.shape({
         pairings: PropTypes.arrayOf(PropTypes.any),
         connect: PropTypes.func,

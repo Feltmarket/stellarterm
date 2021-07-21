@@ -74,7 +74,7 @@ export default function WalletConnectRequestModal(props) {
     );
 }
 WalletConnectRequestModal.propTypes = {
-    data: PropTypes.objectOf(PropTypes.string),
+    data: PropTypes.objectOf(PropTypes.any),
     submit: PropTypes.objectOf(PropTypes.func),
 };
 

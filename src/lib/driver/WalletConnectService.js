@@ -62,7 +62,7 @@ export default class WalletConnectService {
     }
 
     listenWalletConnectEvents() {
-        this.client.on(CLIENT_EVENTS.pairing.created, () => this.onPairCreated());
+        this.client.on(CLIENT_EVENTS.pairing.created, res => this.onPairCreated(res));
 
         this.client.on(CLIENT_EVENTS.pairing.updated, res => this.onPairUpdated(res));
 
@@ -71,7 +71,9 @@ export default class WalletConnectService {
         this.client.on(CLIENT_EVENTS.pairing.proposal, proposal => this.onPairProposal(proposal));
     }
 
-    async onPairCreated() {
+    async onPairCreated(res) {
+        this.appMeta = res.state.metadata;
+        console.log(this.appMeta);
         this.isPairCreated = true;
     }
 
