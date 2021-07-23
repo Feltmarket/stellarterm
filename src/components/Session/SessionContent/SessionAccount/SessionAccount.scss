@@ -9,14 +9,43 @@
 
 .AccountView_app {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     margin-bottom: 1em;
     border-radius: 3px;
     background: $s-color-primary9;
     border: 1px solid #86d38c;
-    align-items: center;
-    font-size: 24px;
-    font-weight: bold;
+
+    .AccountView_app-logo {
+        width: 134px;
+        height: 134px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #fff;
+        border-right: solid 1px #7ed085;
+        border-radius: 4px 0 0 4px;
+    }
+
+    img {
+        width: 104px;
+        height: 104px;
+    }
+
+    .AccountView_app-main {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 22px 15px;
+
+        .AccountView_app-name {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .AccountView_app-description {
+            font-size: 16px;
+        }
+    }
 }
 
 .AccountView_content {

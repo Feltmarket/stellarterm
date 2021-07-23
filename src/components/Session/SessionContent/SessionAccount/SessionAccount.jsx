@@ -15,9 +15,13 @@ export default function SessionAccount(props) {
             <Generic>
                 {hasMetadata &&
                     <div className="AccountView_app">
-                        <div>App name: {props.d.walletConnectService.appMeta.name}</div>
-                        <div>App description: {props.d.walletConnectService.appMeta.description}</div>
-                        <img src={props.d.walletConnectService.appMeta.icons[0]} alt="" height="50" />
+                        <div className="AccountView_app-logo">
+                            <img src={props.d.walletConnectService.appMeta.icons[0]} alt="" />
+                        </div>
+                        <div className="AccountView_app-main">
+                            <div className="AccountView_app-name">{props.d.walletConnectService.appMeta.name}</div>
+                            <div className="AccountView_app-description">{props.d.walletConnectService.appMeta.description}</div>
+                        </div>
                     </div>
                 }
 

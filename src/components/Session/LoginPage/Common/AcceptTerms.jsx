@@ -39,7 +39,7 @@ export default class AcceptTerms extends React.Component {
                     </span>
                 </label>
 
-                <div>
+                <div className="LoginPage_controls">
                     <button
                         className="LoginPage__button"
                         type="submit"
