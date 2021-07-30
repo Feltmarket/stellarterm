@@ -4,7 +4,8 @@ import * as StellarSdk from 'stellar-sdk';
 
 const METADATA = {
     name: 'StellarTerm',
-    description: 'My st description',
+    description: 'Trade on the Stellar Decentralized Exchange. StellarTerm is an open source client for the Stellar ' +
+        'network. Send, receive, and trade assets on the Stellar network easily with StellarTerm.',
     url: 'https://stellarterm.com',
     icons: ['https://avatars.githubusercontent.com/u/25021964?s=200&v=4'],
 };
@@ -73,7 +74,6 @@ export default class WalletConnectService {
 
     async onPairCreated(res) {
         this.appMeta = res.state.metadata;
-        console.log(this.appMeta);
         this.isPairCreated = true;
     }
 
@@ -126,7 +126,7 @@ export default class WalletConnectService {
 
         if (this.client.pairing.topics.length) {
             this.driver.modal.handlers.activate('WalletConnectPairingModal', {
-                pairings: this.client.pairing.values,
+                pairings: this.client.pairing.values.slice(-3),
                 connect: this.connect.bind(this),
             });
             return;
