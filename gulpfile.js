@@ -173,7 +173,6 @@ const bundler = watchify(browserify({
     entries: [
         './src/components/App.jsx',
         './node_modules/lightweight-charts',
-        './node_modules/@json-rpc-tools/ws-connection/node_modules/safe-json-utils/dist/esm/index.js',
     ],
     extensions: ['.jsx', '.js'],
     debug: true,
