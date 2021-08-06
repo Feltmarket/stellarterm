@@ -16,7 +16,7 @@ const STELLAR_DATA = {
         TESTNET: 'stellar:testnet',
     },
     METHODS: {
-        SIGN: 'signTx',
+        SIGN: 'stellar_signXDR',
     },
     GET_ALL_METHODS() {
         return Object.values(this.METHODS);
