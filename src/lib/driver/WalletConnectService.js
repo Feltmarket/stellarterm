@@ -52,7 +52,7 @@ export default class WalletConnectService {
             await this.client.session.get(this.client.session.topics[0]);
 
         // eslint-disable-next-line no-unused-vars
-        const [chain, publicKey] = this.session.state.accounts[0].split(':');
+        const [chain, reference, publicKey] = this.session.state.accounts[0].split(':');
         this.appMeta = this.session.peer.metadata;
         const keypair = StellarSdk.Keypair.fromPublicKey(publicKey);
 
@@ -170,7 +170,7 @@ export default class WalletConnectService {
         this.appMeta = this.session.peer.metadata;
 
         // eslint-disable-next-line no-unused-vars
-        const [chain, publicKey] = this.session.state.accounts[0].split(':');
+        const [chain, reference, publicKey] = this.session.state.accounts[0].split(':');
         const keypair = StellarSdk.Keypair.fromPublicKey(publicKey);
         return this.driver.session.handlers.logIn(keypair, {
             authType: 'wallet-connect',
