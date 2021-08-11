@@ -40,7 +40,7 @@ export default function WalletConnectRequestModal(props) {
             <div className="MultisigSubmitModal__content">
                 <img
                     src={images[data.logo] || data.logo}
-                    className="MultisigSubmitModal__logo"
+                    className="WalletConnectSignModal__logo"
                     alt={data.title}
                 />
                 <span>Transaction has been sent to {data.title}</span>
